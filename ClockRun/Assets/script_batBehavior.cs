@@ -31,7 +31,7 @@ public class script_batBehavior : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.right = new Vector3(mousePos.x,mousePos.y,transform.position.z) - transform.position;
 
-        if(Input.GetKeyDown(KeyCode.F))
+        if(Input.GetKeyDown(KeyCode.F) && swingTimer == 0)
         {
             
             swinging = true;
@@ -39,7 +39,7 @@ public class script_batBehavior : MonoBehaviour
 
 
         }
-        if(Input.GetKeyUp(KeyCode.F))
+        if(Input.GetKeyUp(KeyCode.F) && swingTimer == 0)
         {
                                     animationController.SetBool("Swinging",true);
             float angle = Vector2.SignedAngle(Vector2.right,transform.right);
@@ -56,7 +56,7 @@ public class script_batBehavior : MonoBehaviour
             Time.timeScale = 1;
             GetComponent<BoxCollider2D>().enabled = true;
             kickAllowed = true;
-            swingTimer = 15;
+            swingTimer = 30;
         }
 
         
