@@ -12,6 +12,8 @@ public class script_batBehavior : MonoBehaviour
     bool swinging,kickAllowed;
     int swingTimer;
 
+    Camera cam;
+
     public AudioSource
         whiffSFX,
         hitGearSFX,
@@ -27,16 +29,20 @@ public class script_batBehavior : MonoBehaviour
         animationController = GetComponentInParent<Animator>();
         swingTimer = 0;
         kickAllowed = true;
+
+        cam = Camera.main;
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector2 mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
         transform.right = new Vector3(mousePos.x,mousePos.y,transform.position.z) - transform.position;
 
-        if(Input.GetMouseButtonDown(0) && swingTimer == 0)
+        GetComponentInParent<script_playerMovement>().lookDir = transform.position.x - mousePos.x >= 0f;
+
+        if (Input.GetMouseButtonDown(0) && swingTimer == 0)
         {
             whiffSFX.Play();
             swinging = true;
@@ -61,7 +67,7 @@ public class script_batBehavior : MonoBehaviour
             Time.timeScale = 1;
             GetComponent<BoxCollider2D>().enabled = true;
             kickAllowed = true;
-            swingTimer = 30;
+            swingTimer = 10;
         }
 
         
