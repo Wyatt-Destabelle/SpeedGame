@@ -12,6 +12,11 @@ public class script_batBehavior : MonoBehaviour
     bool swinging,kickAllowed;
     int swingTimer;
 
+    public AudioSource
+        whiffSFX,
+        hitGearSFX,
+        hitWallSFX;
+
     Animator animationController;
     // Start is called before the first frame update
     void Start()
@@ -31,15 +36,15 @@ public class script_batBehavior : MonoBehaviour
         Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.right = new Vector3(mousePos.x,mousePos.y,transform.position.z) - transform.position;
 
-        if(Input.GetKeyDown(KeyCode.F) && swingTimer == 0)
+        if(Input.GetMouseButtonDown(0) && swingTimer == 0)
         {
-            
+            whiffSFX.Play();
             swinging = true;
             Time.timeScale = .5f;
 
 
         }
-        if(Input.GetKeyUp(KeyCode.F) && swingTimer == 0)
+        if(Input.GetMouseButtonDown(0) && swingTimer == 0)
         {
                                     animationController.SetBool("Swinging",true);
             float angle = Vector2.SignedAngle(Vector2.right,transform.right);
@@ -89,16 +94,30 @@ public class script_batBehavior : MonoBehaviour
         if((col.gameObject.tag.Equals("Ground")||col.gameObject.tag.Equals("Wall"))  && kickAllowed)
         {
             kickAllowed = false;
+
+            hitWallSFX.Play();
+
             if(transform.right.y < 0)
             GetComponentInParent<script_playerMovement>().grounded = false;
             GetComponentInParent<script_playerMovement>().movementLockout = true;
             dashTimer = 5;
+
+            swingTimer = 0;
+            GetComponent<BoxCollider2D>().enabled = false;
+            swinging = false;
+
             playerRB.velocity = Vector2.zero;
             playerRB.AddForce(transform.right * -kickForce,ForceMode2D.Impulse);
         }
         if(col.gameObject.tag.Equals("Gear"))
         {
             col.GetComponent<Rigidbody2D>().AddForce(transform.right*hitForce,ForceMode2D.Impulse);
+
+            hitGearSFX.Play();
+
+            swingTimer = 0;
+            GetComponent<BoxCollider2D>().enabled = false;
+            swinging = false;
         }
 
     }

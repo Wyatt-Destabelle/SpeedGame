@@ -13,6 +13,9 @@ public class script_Reciever : MonoBehaviour
     public float gearsNeeded;
     float gearsTaken;
     float MoveTime;
+
+    public AudioSource lockSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -40,6 +43,7 @@ public class script_Reciever : MonoBehaviour
     {
         if(col.gameObject.tag == "Gear")
         {
+            lockSFX.Play();
             Destroy(col);
             gearsTaken += 1;
             MoveTime = 10;
