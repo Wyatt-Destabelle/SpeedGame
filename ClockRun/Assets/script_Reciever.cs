@@ -43,6 +43,8 @@ public class script_Reciever : MonoBehaviour
     {
         if(col.gameObject.tag == "Gear")
         {
+            col.GetComponent<script_gearBehavior>().collected = true;
+            col.GetComponent<script_gearBehavior>().target = gameObject;
             lockSFX.Play();
             Destroy(col);
             gearsTaken += 1;

@@ -26,6 +26,7 @@ public class script_playerMovement : MonoBehaviour
         landSFX,
         walkSFX;
 
+    public bool lookDir;
     SpriteRenderer spriteController;
     
     // Start is called before the first frame update
@@ -43,6 +44,8 @@ public class script_playerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        spriteController.flipX = lookDir;
+
         float xIn = Input.GetAxis("Horizontal");
         if(Input.GetKeyDown(KeyCode.Space) && grounded)
         {
@@ -91,10 +94,6 @@ public class script_playerMovement : MonoBehaviour
         float xIn = Input.GetAxis("Horizontal");
         if(Math.Abs(xIn) > .15)
         {
-            if(xIn < 0)
-                spriteController.flipX = true;
-            else if(xIn > 0)
-                spriteController.flipX = false;
             if(Math.Abs(playerRB.velocity.x) < topSpeed || Math.Sign(playerRB.velocity.x) != Math.Sign(xIn))
             {
               playerRB.velocity = Vector2.MoveTowards(playerRB.velocity,Vector2.right*topSpeed*xIn + Vector2.up*playerRB.velocity.y,A);
