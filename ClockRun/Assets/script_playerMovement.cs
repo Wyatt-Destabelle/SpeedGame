@@ -8,6 +8,7 @@ using UnityEngine.Scripting.APIUpdating;
 
 public class script_playerMovement : MonoBehaviour
 {
+    public bool movementLockout;
     Animator aController;
      Rigidbody2D playerRB;
     Transform playerTransform;
@@ -19,14 +20,18 @@ public class script_playerMovement : MonoBehaviour
     public bool grounded;
 
     float last;
+
+    SpriteRenderer spriteController;
     
     // Start is called before the first frame update
     void Start()
     {
+        movementLockout = false;
         aController = GetComponent<Animator>();
         grounded =  false;
         playerRB = GetComponent<Rigidbody2D>();
         playerTransform = GetComponent<Transform>();
+        spriteController = GetComponent<SpriteRenderer>();
         last = 0;
     }
 
@@ -34,17 +39,17 @@ public class script_playerMovement : MonoBehaviour
     void Update()
     {
         float xIn = Input.GetAxis("Horizontal");
-        if(Input.GetKey(KeyCode.Space) && grounded)
+        if(Input.GetKeyDown(KeyCode.Space) && grounded)
         {
             playerRB.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
-            grounded = false;
+            //grounded = false;
         }
         if(Input.GetKey(KeyCode.Space) && !grounded)
         {
-            risingGravity = .75f;
+            risingGravity = .45f;
         }
         if(Input.GetKeyUp(KeyCode.Space))
-            risingGravity = 1;
+            risingGravity = .55f;
     }
     void FixedUpdate()
     {
@@ -63,6 +68,8 @@ public class script_playerMovement : MonoBehaviour
     }
     void Move()
     {
+        if(movementLockout)
+            return;
         float A,F;
         if(grounded)
         {
@@ -78,6 +85,10 @@ public class script_playerMovement : MonoBehaviour
         float xIn = Input.GetAxis("Horizontal");
         if(Math.Abs(xIn) > .15)
         {
+            if(xIn < 0)
+                spriteController.flipX = true;
+            else if(xIn > 0)
+                spriteController.flipX = false;
             if(Math.Abs(playerRB.velocity.x) < topSpeed || Math.Sign(playerRB.velocity.x) != Math.Sign(xIn))
             {
               playerRB.velocity = Vector2.MoveTowards(playerRB.velocity,Vector2.right*topSpeed*xIn + Vector2.up*playerRB.velocity.y,A);
@@ -101,11 +112,11 @@ public class script_playerMovement : MonoBehaviour
         }
         last = xIn;
     }
-
+    /*
     void OnCollisionEnter2D(Collision2D col)
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.right *.4f, -transform.up,.5f,(1<<3));
-        RaycastHit2D hit2 = Physics2D.Raycast(transform.position-Vector3.right *.4f, -transform.up,.5f,(1<<3));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position + Vector3.right *.25f - transform.up * .15f, -transform.up,.5f,(1<<3));
+        RaycastHit2D hit2 = Physics2D.Raycast(transform.position-Vector3.right *.25f- transform.up * .15f, -transform.up,.5f,(1<<3));
         if(col.gameObject.tag == "Ground" && (hit.collider != null ||  hit2.collider != null))
         {
         playerRB.velocity.Set(playerRB.velocity.x,0);
@@ -125,4 +136,5 @@ public class script_playerMovement : MonoBehaviour
         aController.SetBool("Grounded",false);
         }
     }
+    */
 }
