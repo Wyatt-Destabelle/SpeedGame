@@ -126,7 +126,17 @@ public class script_batBehavior : MonoBehaviour
             swingTimer = 0;
             GetComponent<BoxCollider2D>().enabled = false;
             swinging = false;
+
+            StartCoroutine("HitStop");
         }
 
+    }
+
+    public IEnumerator HitStop()
+    {
+        yield return new WaitForSecondsRealtime(.01f);
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(.1f);
+        Time.timeScale = 1f;
     }
 }
