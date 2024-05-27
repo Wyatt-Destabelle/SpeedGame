@@ -14,6 +14,9 @@ public class script_batBehavior : MonoBehaviour
 
     Camera cam;
 
+    public ParticleSystem hitWallPS;
+    public ParticleSystem hitGearPS;
+
     public AudioSource
         whiffSFX,
         hitGearSFX,
@@ -99,7 +102,7 @@ public class script_batBehavior : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if((col.gameObject.tag.Equals("Ground")||col.gameObject.tag.Equals("Wall"))  && kickAllowed)
+        if((col.gameObject.tag.Equals("Ground")||col.gameObject.tag.Equals("Wall")) && kickAllowed)
         {
             kickAllowed = false;
 
@@ -116,6 +119,9 @@ public class script_batBehavior : MonoBehaviour
 
             playerRB.velocity = Vector2.zero;
             playerRB.AddForce(transform.right * -kickForce,ForceMode2D.Impulse);
+
+            hitWallPS.transform.position = col.ClosestPoint(batTransform.position);
+            hitWallPS.Play();
         }
         if(col.gameObject.tag.Equals("Gear"))
         {
@@ -128,6 +134,9 @@ public class script_batBehavior : MonoBehaviour
             swinging = false;
 
             StartCoroutine("HitStop");
+
+            hitGearPS.transform.position = col.ClosestPoint(batTransform.position);
+            hitGearPS.Play();
         }
 
     }
