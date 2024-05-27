@@ -48,6 +48,8 @@ public class script_batBehavior : MonoBehaviour
             swinging = true;
             Time.timeScale = .5f;
 
+            animationController.SetTrigger("StopAnim");
+
 
         }
         if(Input.GetMouseButtonDown(0) && swingTimer == 0)
