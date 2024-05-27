@@ -6,6 +6,9 @@ using UnityEngine;
 public class script_Reciever : MonoBehaviour
 {
     float MoveTime;
+
+    public AudioSource lockSFX;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,7 @@ public class script_Reciever : MonoBehaviour
     {
         if(col.gameObject.tag == "Gear")
         {
+            lockSFX.Play();
             Destroy(col);
             MoveTime = 10;
         }

@@ -27,6 +27,7 @@ public class script_groundDetection : MonoBehaviour
             GetComponentInParent<script_playerMovement>().grounded = true;
             playerRB.velocity.Set(playerRB.velocity.x,0);
             aController.SetBool("Grounded",true);
+            playerRB.GetComponent<script_playerMovement>().landSFX.Play();
         }
     }
     void OnTriggerExit2D(Collider2D col)

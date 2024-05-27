@@ -21,6 +21,11 @@ public class script_playerMovement : MonoBehaviour
 
     float last;
 
+    public AudioSource
+        jumpSFX,
+        landSFX,
+        walkSFX;
+
     SpriteRenderer spriteController;
     
     // Start is called before the first frame update
@@ -41,6 +46,7 @@ public class script_playerMovement : MonoBehaviour
         float xIn = Input.GetAxis("Horizontal");
         if(Input.GetKeyDown(KeyCode.Space) && grounded)
         {
+            jumpSFX.Play();
             playerRB.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
             //grounded = false;
         }
