@@ -11,6 +11,8 @@ public class script_levelPortal : MonoBehaviour
     public Vector2 newLocation;
     public float CameraX;
 
+    public CameraControls cam;
+
     public GameObject screen;
 
     public GameObject player;
@@ -20,6 +22,7 @@ public class script_levelPortal : MonoBehaviour
     void Start()
     {
         moving = false;
+        cam = Camera.main.GetComponent<CameraControls>();
     }
 
     // Update is called once per frame
@@ -30,8 +33,8 @@ public class script_levelPortal : MonoBehaviour
             if(screen.transform.position.y > 0)
             {
             player.transform.position = newLocation;
-            Camera.main.transform.position = new Vector3(CameraX,0,-10);
-            screen.transform.position = new Vector3(CameraX,screen.transform.position.y,screen.transform.position.z);
+                cam.save = new Vector3(CameraX, 0, -10);
+                screen.transform.position = new Vector3(CameraX,screen.transform.position.y,screen.transform.position.z);
             moving = false;
             }
         }

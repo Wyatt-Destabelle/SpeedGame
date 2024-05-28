@@ -13,6 +13,7 @@ public class script_batBehavior : MonoBehaviour
     int swingTimer;
 
     Camera cam;
+    CameraControls camControls;
 
     public ParticleSystem hitWallPS;
     public ParticleSystem hitGearPS;
@@ -34,6 +35,7 @@ public class script_batBehavior : MonoBehaviour
         kickAllowed = true;
 
         cam = Camera.main;
+        camControls = cam.GetComponent<CameraControls>();
         
     }
 
@@ -122,6 +124,8 @@ public class script_batBehavior : MonoBehaviour
 
             hitWallPS.transform.position = col.ClosestPoint(batTransform.position);
             hitWallPS.Play();
+
+            camControls.CameraShake(.05f, .2f);
         }
         if(col.gameObject.tag.Equals("Gear"))
         {
@@ -139,6 +143,9 @@ public class script_batBehavior : MonoBehaviour
 
             hitGearPS.transform.position = col.ClosestPoint(batTransform.position);
             hitGearPS.Play();
+
+            camControls.CameraShake(.15f, .4f);
+            //camControls.StreakLines(.1f);
         }
 
     }
@@ -148,6 +155,7 @@ public class script_batBehavior : MonoBehaviour
         yield return new WaitForSecondsRealtime(.01f);
         Time.timeScale = 0f;
         yield return new WaitForSecondsRealtime(.1f);
+        camControls.StreakLines(.2f);
         Time.timeScale = 1f;
     }
 }
