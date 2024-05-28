@@ -14,6 +14,9 @@ public class script_batBehavior : MonoBehaviour
 
     Camera cam;
 
+    public ParticleSystem hitWallPS;
+    public ParticleSystem hitGearPS;
+
     public AudioSource
         whiffSFX,
         hitGearSFX,
@@ -47,6 +50,8 @@ public class script_batBehavior : MonoBehaviour
             whiffSFX.Play();
             swinging = true;
             Time.timeScale = .5f;
+
+            animationController.SetTrigger("StopAnim");
 
 
         }
@@ -97,7 +102,7 @@ public class script_batBehavior : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D col)
     {
-        if((col.gameObject.tag.Equals("Ground")||col.gameObject.tag.Equals("Wall"))  && kickAllowed)
+        if((col.gameObject.tag.Equals("Ground")||col.gameObject.tag.Equals("Wall")) && kickAllowed)
         {
             kickAllowed = false;
 
@@ -114,6 +119,9 @@ public class script_batBehavior : MonoBehaviour
 
             playerRB.velocity = Vector2.zero;
             playerRB.AddForce(transform.right * -kickForce,ForceMode2D.Impulse);
+
+            hitWallPS.transform.position = col.ClosestPoint(batTransform.position);
+            hitWallPS.Play();
         }
         if(col.gameObject.tag.Equals("Gear"))
         {
@@ -124,7 +132,20 @@ public class script_batBehavior : MonoBehaviour
             swingTimer = 0;
             GetComponent<BoxCollider2D>().enabled = false;
             swinging = false;
+
+            StartCoroutine("HitStop");
+
+            hitGearPS.transform.position = col.ClosestPoint(batTransform.position);
+            hitGearPS.Play();
         }
 
+    }
+
+    public IEnumerator HitStop()
+    {
+        yield return new WaitForSecondsRealtime(.01f);
+        Time.timeScale = 0f;
+        yield return new WaitForSecondsRealtime(.1f);
+        Time.timeScale = 1f;
     }
 }
