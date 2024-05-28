@@ -33,8 +33,10 @@ public class script_levelPortal : MonoBehaviour
             if(screen.transform.position.y > 0)
             {
             player.transform.position = newLocation;
+            
                 cam.save = new Vector3(CameraX, 0, -10);
                 screen.transform.position = new Vector3(CameraX,screen.transform.position.y,screen.transform.position.z);
+                
             moving = false;
             }
         }
