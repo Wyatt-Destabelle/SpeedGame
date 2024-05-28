@@ -57,7 +57,7 @@ public class script_Reciever : MonoBehaviour
             lockSFX.Play();
             Destroy(col);
             gearsTaken += 1;
-            MoveTime = 10;
+            MoveTime += 10;
         }
     }
 

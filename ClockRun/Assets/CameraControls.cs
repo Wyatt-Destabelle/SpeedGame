@@ -11,6 +11,7 @@ public class CameraControls : MonoBehaviour
 
     float streakTimer, streakTotal;
 
+    public GameObject moon;
     public RawImage streak;
     public GameObject gm;
 
@@ -31,6 +32,7 @@ public class CameraControls : MonoBehaviour
         else
         {
             transform.position = save;
+            
         }
 
         if (streakTimer > 0)

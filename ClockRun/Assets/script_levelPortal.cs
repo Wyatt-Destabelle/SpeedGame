@@ -17,6 +17,8 @@ public class script_levelPortal : MonoBehaviour
 
     public GameObject player;
 
+    public AudioSource winSFX;
+
     bool moving;
     // Start is called before the first frame update
     void Start()
@@ -35,6 +37,7 @@ public class script_levelPortal : MonoBehaviour
             player.transform.position = newLocation;
             
                 cam.save = new Vector3(CameraX, 0, -10);
+                cam.moon.transform.position = new Vector3(CameraX, 2, 0);
                 screen.transform.position = new Vector3(CameraX,screen.transform.position.y,screen.transform.position.z);
                 
             moving = false;
@@ -51,6 +54,7 @@ public class script_levelPortal : MonoBehaviour
             moving = true;
             GetComponent<Collider2D>().enabled = false;
             player = col.gameObject;
+            winSFX.Play();
         }
     }
 }
