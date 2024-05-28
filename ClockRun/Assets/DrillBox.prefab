@@ -125,6 +125,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b181d11dc70da41f0b261b9b72be9d0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nextLevel: 
+  portal: {fileID: 0}
+  DistancePerGear: 0
+  gearsNeeded: 0
   lockSFX: {fileID: 710432444931338485}
 --- !u!82 &710432444931338485
 AudioSource:
@@ -137,7 +141,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 0a73a823ecc937b469648c294cc2373a, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

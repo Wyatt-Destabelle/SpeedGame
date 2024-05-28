@@ -12,16 +12,21 @@ public class script_gearBehavior : MonoBehaviour
     public bool collected = false;
     public GameObject target;
     float timer = 1f;
+
+    Animator anim;
+
     // Start is called before the first frame update
     void Start()
     {
         gearRB = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        anim.SetFloat("Speed", gearRB.velocity.magnitude * .5f);
+
         if(gearRB.velocity.magnitude > 0)
             gearRB.velocity =  Vector2.MoveTowards(gearRB.velocity,Vector2.zero, intertia);
 

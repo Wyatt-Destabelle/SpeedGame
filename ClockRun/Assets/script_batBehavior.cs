@@ -135,6 +135,8 @@ public class script_batBehavior : MonoBehaviour
 
             StartCoroutine("HitStop");
 
+            playerRB.AddForce(transform.right * -kickForce * .5f, ForceMode2D.Impulse);
+
             hitGearPS.transform.position = col.ClosestPoint(batTransform.position);
             hitGearPS.Play();
         }
