@@ -70,6 +70,7 @@
     <Compile Include="Assets/script_levelPortal.cs" />
     <Compile Include="Assets/BackgroundMove.cs" />
     <Compile Include="Assets/script_Screen.cs" />
+    <Compile Include="Assets/script_Button.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
