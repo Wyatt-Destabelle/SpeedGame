@@ -2023,6 +2023,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2584821096052455234, guid: 3b3da2c0a93444812aff2400ec9fd79c, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.4
+      objectReference: {fileID: 0}
     - target: {fileID: 3716769981197014199, guid: 3b3da2c0a93444812aff2400ec9fd79c, type: 3}
       propertyPath: m_Size.x
       value: 1
@@ -2082,6 +2086,10 @@ PrefabInstance:
     - target: {fileID: 3716769981232310070, guid: 3b3da2c0a93444812aff2400ec9fd79c, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6566655034990735487, guid: 3b3da2c0a93444812aff2400ec9fd79c, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b3da2c0a93444812aff2400ec9fd79c, type: 3}

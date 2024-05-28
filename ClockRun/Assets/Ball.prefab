@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8283175087070640107}
   - component: {fileID: 8320704685909835607}
   - component: {fileID: 8173280735670679545}
+  - component: {fileID: 6653354086817327637}
   m_Layer: 0
   m_Name: Ball
   m_TagString: Gear
@@ -137,3 +138,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   intertia: 0.2
+  collected: 0
+  target: {fileID: 0}
+--- !u!95 &6653354086817327637
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3163936348135369840}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0b7a7754fd7a599449dcc8439b7f61f4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0

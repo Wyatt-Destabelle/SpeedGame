@@ -19,6 +19,8 @@ public class script_playerMovement : MonoBehaviour
 
     public bool grounded;
 
+    float bufferJump;
+
     float last;
 
     public AudioSource
@@ -46,11 +48,27 @@ public class script_playerMovement : MonoBehaviour
     {
         spriteController.flipX = lookDir;
 
-        float xIn = Input.GetAxis("Horizontal");
-        if(Input.GetKeyDown(KeyCode.Space) && grounded)
+        bufferJump -= Time.deltaTime;
+        if (grounded && bufferJump >= 0f)
         {
             jumpSFX.Play();
-            playerRB.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+            playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            bufferJump = -10f;
+        }
+
+        float xIn = Input.GetAxis("Horizontal");
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            if (grounded)
+            {
+                jumpSFX.Play();
+                playerRB.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            }
+            else
+            {
+                bufferJump = .2f;
+            }
+            
             //grounded = false;
         }
         if(Input.GetKey(KeyCode.Space) && !grounded)
