@@ -73,6 +73,7 @@
     <Compile Include="Assets/CameraControls.cs" />
     <Compile Include="Assets/script_groundDetection.cs" />
     <Compile Include="Assets/script_GameManager.cs" />
+    <Compile Include="Assets/script_hurt.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />
