@@ -5,7 +5,7 @@ using UnityEngine;
 public class script_Screen : MonoBehaviour
 {
     public bool moving;
-    
+    public float returnValue;
     // Start is called before the first frame update
     void Start()
     {
@@ -16,10 +16,13 @@ public class script_Screen : MonoBehaviour
     void FixedUpdate()
     {
         if(moving)
-            transform.position += Vector3.up*Time.fixedDeltaTime*25;
+        {
+            transform.position += Vector3.up*Time.fixedDeltaTime*50;
+        }
 
         if(transform.position.y > 17)
         {
+            
             moving = false;
             transform.position = new Vector3(transform.position.x,-17,transform.position.z);
         }
