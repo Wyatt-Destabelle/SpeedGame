@@ -10,6 +10,7 @@ public class CameraControls : MonoBehaviour
 
     float streakTimer, streakTotal;
 
+    public GameObject moon;
     public RawImage streak;
 
     // Start is called before the first frame update
@@ -29,6 +30,7 @@ public class CameraControls : MonoBehaviour
         else
         {
             transform.position = save;
+            
         }
 
         if (streakTimer > 0)

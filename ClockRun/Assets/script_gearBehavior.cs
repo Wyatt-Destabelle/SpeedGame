@@ -13,6 +13,8 @@ public class script_gearBehavior : MonoBehaviour
     public GameObject target;
     float timer = 1f;
 
+    public AudioSource gearBounceSFX;
+
     Animator anim;
 
     // Start is called before the first frame update
@@ -44,6 +46,7 @@ public class script_gearBehavior : MonoBehaviour
     {
         if(col.gameObject.tag.Equals("Ground")|| col.gameObject.tag == "Wall")
         {
+            gearBounceSFX.Play();
             Vector3 point = col.ClosestPoint(transform.position);
             point = point - transform.position;
             if(Math.Abs(point.x) > Math.Abs(point.y))
