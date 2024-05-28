@@ -25,6 +25,7 @@ public class script_gearBehavior : MonoBehaviour
         if(gearRB.velocity.magnitude > 0)
             gearRB.velocity =  Vector2.MoveTowards(gearRB.velocity,Vector2.zero, intertia);
 
+
         if (collected)
         {
             gearRB.transform.position = Vector3.Lerp(gearRB.transform.position, target.transform.position, .1f);

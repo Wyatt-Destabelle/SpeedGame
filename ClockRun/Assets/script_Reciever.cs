@@ -7,7 +7,9 @@ using UnityEngine;
 
 public class script_Reciever : MonoBehaviour
 {
-    public String nextLevel;
+    public GameObject Screen;
+    public Vector2 nextLevel;
+    public float CameraX;
     public GameObject portal;
         public float DistancePerGear;
     public float gearsNeeded;
@@ -28,8 +30,11 @@ public class script_Reciever : MonoBehaviour
     {
         if(gearsNeeded == gearsTaken)
         {
+            
             GameObject g = Instantiate(portal,transform);
-            g.GetComponent<script_levelPortal>().nextLevel = nextLevel;
+            g.GetComponent<script_levelPortal>().newLocation = nextLevel;
+            g.GetComponent<script_levelPortal>().CameraX = CameraX;
+            g.GetComponent<script_levelPortal>().screen = Screen;
             gearsNeeded = -1;
         }
 
