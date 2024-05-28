@@ -12,23 +12,42 @@ public class script_GameManager : MonoBehaviour
     public GameObject G;
     TextMeshProUGUI T;
 
+    public Vector3 respawnPoint;
+
     public bool death;
+    public bool win;
+    public GameObject player;
+    public List<GameObject> list;
     void Start()
     {
         death = false;
     currentTime = 0;
     T = G.GetComponent<TextMeshProUGUI>();
+    win = false;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if(!win)
+        {
         currentTime += Time.deltaTime;
         String text = currentTime.ToString("#.0");
         T.text = text;
-
-        if(death)
+        }
+        else
+        {
+        String text = currentTime.ToString("#.0");
+            T.text = "Congratulations! Your time was: "+ text +" ! Press f to restart.";
+        }
+        if(Input.GetKeyDown(KeyCode.F) && win)
             SceneManager.LoadScene("LevelZero");
+        if(death)
+        {
+                    SceneManager.LoadScene("LevelZero");
+
+        }
+    
 
 
     }

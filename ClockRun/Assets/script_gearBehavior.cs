@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class script_gearBehavior : MonoBehaviour
 {
+    Vector3 origPos;
      Rigidbody2D gearRB;
     public float intertia;
 
@@ -18,6 +19,7 @@ public class script_gearBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        origPos = transform.position;
         gearRB = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
@@ -55,6 +57,11 @@ public class script_gearBehavior : MonoBehaviour
                 gearRB.velocity = new Vector2(gearRB.velocity.x,-gearRB.velocity.y);
             }
         }
+    }
+
+    public void resetPos()
+    {
+        transform.position = origPos;
     }
 
     

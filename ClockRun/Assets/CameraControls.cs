@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,6 +12,7 @@ public class CameraControls : MonoBehaviour
     float streakTimer, streakTotal;
 
     public RawImage streak;
+    public GameObject gm;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +41,11 @@ public class CameraControls : MonoBehaviour
         else
         {
             streak.color = Color.clear;
+        }
+
+        if(transform.position.x ==80)
+        {
+            gm.GetComponent<script_GameManager>().win = true;
         }
     }
 

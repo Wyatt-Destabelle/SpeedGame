@@ -8,6 +8,7 @@ using UnityEngine;
 public class script_Reciever : MonoBehaviour
 {
     public GameObject Screen;
+    public GameObject gameManager;
     public Vector2 nextLevel;
     public float CameraX;
     public GameObject portal;
@@ -18,9 +19,12 @@ public class script_Reciever : MonoBehaviour
 
     public AudioSource lockSFX;
 
+    Vector3 origPos;
+
     // Start is called before the first frame update
     void Start()
     {
+        origPos = transform.position;
         gearsTaken = 0;
         MoveTime = 0;
     }
@@ -56,4 +60,10 @@ public class script_Reciever : MonoBehaviour
             MoveTime = 10;
         }
     }
+
+    public void resetPos()
+    {
+        transform.position = origPos;
+    }
+
 }
